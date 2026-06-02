@@ -7,29 +7,98 @@
 // Console.WriteLine("valor de a:"+a);
 // Console.WriteLine("valor de b:"+b);
 
-int num, invertido = 0;
-Console.WriteLine("Ingrese un numero entero: ");
+// int num, invertido = 0;
+// Console.WriteLine("Ingrese un numero entero: ");
 
-string numString = Console.ReadLine()??"";
-bool resultado = int.TryParse(numString, out num);
+// string numString = Console.ReadLine()??"";
+// bool resultado = int.TryParse(numString, out num);
 
-if (resultado)
+// if (resultado)
+// {
+//     Console.WriteLine("El numero ingresado es: " + num);
+//     if (num > 0)
+//     {
+//         while (num != 0)
+//         {
+//             int aux = num % 10;
+//             invertido = (invertido * 10) + aux;
+//             num /= 10;
+//         }
+//         string salida = "El numero invertido es: " + invertido;
+//         Console.WriteLine(salida);
+//     }
+// }
+// else
+// {
+//     Console.WriteLine("Error");
+// }
+
+
+//CALCULADORA V1
+using System.Linq.Expressions;
+
+int opcion, volver;
+float num1, num2;
+bool EsNumero1, EsNumero2;
+
+do
 {
-    Console.WriteLine("El numero ingresado es: " + num);
-    if (num > 0)
+    //verifica que este entre las opciones
+    do
     {
-        while (num != 0)
-        {
-            int aux = num % 10;
-            invertido = (invertido * 10) + aux;
-            num /= 10;
-        }
-        string salida = "El numero invertido es: " + invertido;
-        Console.WriteLine(salida);
-    }
-}
-else
-{
-    Console.WriteLine("Error");
-}
+        Console.WriteLine("1. Sumar \n2. Restar \n3. Multiplicar \n4. Dividir ");
+        Console.Write("\nSeleccione una opcion: ");
+        string numString = Console.ReadLine() ?? "";
+        bool resultado = int.TryParse(numString, out opcion);
 
+    } while (opcion < 1 || opcion > 4);
+
+    //verifica que sea numero lo q me ingreso el usuario
+    do
+    {
+        //num1
+        Console.Write("\nIngrese num1: ");
+        string num1String = Console.ReadLine() ?? "";
+        EsNumero1 = float.TryParse(num1String, out num1);
+
+    } while (!EsNumero1);
+
+    do
+    {
+        //num2
+        Console.Write("Ingrese num2: ");
+        string num2String = Console.ReadLine() ?? "";
+        EsNumero2 = float.TryParse(num2String, out num2);
+    } while (!EsNumero2);
+
+    double operacion = 0;
+
+    switch (opcion)
+    {
+        case 1:
+            operacion = Math.Round(num1 + num2, 2);
+            break;
+
+        case 2:
+            operacion = Math.Round(num1 - num2, 2);
+            // Console.WriteLine(resta);
+            break;
+
+        case 3:
+            operacion = Math.Round(num1 * num2, 2);
+            // Console.WriteLine(producto);
+            break;
+
+        case 4:
+            operacion = Math.Round(num1 / num2, 2);
+            // Console.WriteLine(division);
+            break;
+    }
+
+    Console.WriteLine("\nRESULTADO = " + operacion);
+
+    Console.Write("\nDesea volver a operar? (1. SI // 2. NO) --> ");
+    string respuestaString = Console.ReadLine() ?? "";
+    bool respuesta = int.TryParse(respuestaString, out volver);
+
+} while (volver == 1);
