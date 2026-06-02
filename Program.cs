@@ -35,11 +35,9 @@
 
 
 //CALCULADORA V1
-using System.Linq.Expressions;
-
-int opcion, volver;
+int opcion, volver = 1;
 float num1, num2;
-bool EsNumero1, EsNumero2;
+bool resultado, EsNumero1, EsNumero2;
 
 do
 {
@@ -49,7 +47,7 @@ do
         Console.WriteLine("1. Sumar \n2. Restar \n3. Multiplicar \n4. Dividir ");
         Console.Write("\nSeleccione una opcion: ");
         string numString = Console.ReadLine() ?? "";
-        bool resultado = int.TryParse(numString, out opcion);
+        resultado = int.TryParse(numString, out opcion);
 
     } while (opcion < 1 || opcion > 4);
 
@@ -81,17 +79,23 @@ do
 
         case 2:
             operacion = Math.Round(num1 - num2, 2);
-            // Console.WriteLine(resta);
             break;
 
         case 3:
             operacion = Math.Round(num1 * num2, 2);
-            // Console.WriteLine(producto);
             break;
 
         case 4:
-            operacion = Math.Round(num1 / num2, 2);
-            // Console.WriteLine(division);
+            if (num2 != 0)
+            {
+                operacion = Math.Round(num1 / num2, 2);
+
+            }
+            else
+            {
+                Console.WriteLine("No se puede realizar la division en 0");
+                continue;
+            }
             break;
     }
 
@@ -99,6 +103,6 @@ do
 
     Console.Write("\nDesea volver a operar? (1. SI // 2. NO) --> ");
     string respuestaString = Console.ReadLine() ?? "";
-    bool respuesta = int.TryParse(respuestaString, out volver);
+    int.TryParse(respuestaString, out volver);
 
 } while (volver == 1);
