@@ -36,7 +36,7 @@
 
 //CALCULADORA V1
 int opcion, volver = 1;
-float num1, num2;
+float num1 = 0, num2 = 0;
 bool resultado, EsNumero1, EsNumero2;
 
 do
@@ -44,32 +44,46 @@ do
     //verifica que este entre las opciones
     do
     {
-        Console.WriteLine("1. Sumar \n2. Restar \n3. Multiplicar \n4. Dividir ");
+        Console.WriteLine("1. Sumar \n2. Restar \n3. Multiplicar \n4. Dividir \n5. Maximo \n6. Minimo \n7. Valor Absoluto\n8. Cuadrado \n9. Raiz cuadrada \n10. Seno \n11. Coseno \n12. Parte entera de un tipo float\n");
         Console.Write("\nSeleccione una opcion: ");
         string numString = Console.ReadLine() ?? "";
         resultado = int.TryParse(numString, out opcion);
 
-    } while (opcion < 1 || opcion > 4);
+    } while (!resultado || opcion < 1 || opcion > 12);
 
-    //verifica que sea numero lo q me ingreso el usuario
-    do
-    {
-        //num1
-        Console.Write("\nIngrese num1: ");
-        string num1String = Console.ReadLine() ?? "";
-        EsNumero1 = float.TryParse(num1String, out num1);
-
-    } while (!EsNumero1);
-
-    do
-    {
-        //num2
-        Console.Write("Ingrese num2: ");
-        string num2String = Console.ReadLine() ?? "";
-        EsNumero2 = float.TryParse(num2String, out num2);
-    } while (!EsNumero2);
 
     double operacion = 0;
+
+    if (opcion >= 1 && opcion <= 6)
+    {
+        //verifica que sea numero lo q me ingreso el usuario
+        do
+        {
+            //num1
+            Console.Write("\nIngrese num1: ");
+            string num1String = Console.ReadLine() ?? "";
+            EsNumero1 = float.TryParse(num1String, out num1);
+
+        } while (!EsNumero1);
+
+        do
+        {
+            //num2
+            Console.Write("Ingrese num2: ");
+            string num2String = Console.ReadLine() ?? "";
+            EsNumero2 = float.TryParse(num2String, out num2);
+        } while (!EsNumero2);
+    }
+    else
+    {
+        do
+        {
+            Console.Write("\nIngrese un numero: ");
+            string num1String = Console.ReadLine() ?? "";
+            EsNumero1 = float.TryParse(num1String, out num1);
+
+        } while (!EsNumero1);
+    }
 
     switch (opcion)
     {
@@ -89,7 +103,6 @@ do
             if (num2 != 0)
             {
                 operacion = Math.Round(num1 / num2, 2);
-
             }
             else
             {
@@ -97,8 +110,48 @@ do
                 continue;
             }
             break;
-    }
 
+        case 5:
+            operacion = Math.Round(Math.Max(num1, num2), 2);
+            break;
+
+        case 6:
+            operacion = Math.Round(Math.Min(num1, num2), 2);
+            break;
+
+        case 7:
+            operacion = Math.Round(Math.Abs(num1), 2);
+            break;
+
+        case 8:
+            operacion = Math.Round(Math.Pow(num1, 2), 2);
+            break;
+
+        case 9:
+            if (num1 >= 0)
+            {
+                operacion = Math.Round(Math.Sqrt(num1), 2);
+            }
+            else
+            {
+                Console.WriteLine("No se puede realizar la raiz cuadrada de un numero negativo");
+                continue;
+            }
+            break;
+
+        case 10:
+            operacion = Math.Round(Math.Sin(num1), 2);
+            break;
+
+        case 11:
+            operacion = Math.Round(Math.Cos(num1), 2);
+            break;
+
+        case 12:
+            operacion = (int)num1;
+            break;
+
+    }
     Console.WriteLine("\nRESULTADO = " + operacion);
 
     Console.Write("\nDesea volver a operar? (1. SI // 2. NO) --> ");
