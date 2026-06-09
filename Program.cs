@@ -33,18 +33,68 @@
 //     Console.WriteLine("Error");
 // }
 
-
 //CALCULADORA V1
 int opcion, volver = 1;
 float num1 = 0, num2 = 0;
 bool resultado, EsNumero1, EsNumero2;
+
+Console.Write("Ingrese una cadena de texto: ");
+string CadenaTexto = Console.ReadLine() ?? "";
+int longitud = CadenaTexto.Length;
+Console.WriteLine($"La longitud de la cadena de texto ingresada es: {longitud}\n");
+
+Console.Write("Ingrese una cadena de texto: ");
+string CadenaTexto2 = Console.ReadLine() ?? "";
+Console.WriteLine($"Cadenas concatendas: {CadenaTexto} {CadenaTexto2}\n");
+
+string subCadena = CadenaTexto.Substring(longitud - 1); //extrae desde el indice 1 hasta el final
+Console.WriteLine($"Subcadena de la primera cadena: {subCadena}\n");
+
+foreach (char letra in CadenaTexto2)
+{
+    Console.WriteLine(letra);
+}
+
+Console.Write("\nIngrese la palabra que quiere buscar en la cadena de texto: ");
+string BuscarPalabra = Console.ReadLine() ?? "";
+
+int contador = 0, posicion = 0;
+
+while ((posicion = CadenaTexto.IndexOf(BuscarPalabra, posicion)) != -1)
+{
+    contador++;
+    posicion += BuscarPalabra.Length;
+}
+
+if (contador > 0)
+{
+    Console.WriteLine($"La palabra {BuscarPalabra} fue encontrada {contador} veces en el texto\n");
+}
+else
+{
+    Console.WriteLine($"La palabra {BuscarPalabra} NO fue encontrada en el texto\n");
+
+}
+
+string textoMayuscula = CadenaTexto2.ToUpper();
+Console.WriteLine($"La cadena en mayuscula: {textoMayuscula}");
+
+string textoMinuscula = CadenaTexto2.ToLower();
+Console.WriteLine($"La cadena en mayuscula: {textoMinuscula}\n");
+
+string[] palabras = CadenaTexto.Split('o');
+
+foreach (string palabra in palabras)
+{
+    Console.WriteLine(palabra);
+}
 
 do
 {
     //verifica que este entre las opciones
     do
     {
-        Console.WriteLine("1. Sumar \n2. Restar \n3. Multiplicar \n4. Dividir \n5. Maximo \n6. Minimo \n7. Valor Absoluto\n8. Cuadrado \n9. Raiz cuadrada \n10. Seno \n11. Coseno \n12. Parte entera de un tipo float\n");
+        Console.WriteLine("\n1. Sumar \n2. Restar \n3. Multiplicar \n4. Dividir \n5. Maximo \n6. Minimo \n7. Valor Absoluto\n8. Cuadrado \n9. Raiz cuadrada \n10. Seno \n11. Coseno \n12. Parte entera de un tipo float\n");
         Console.Write("\nSeleccione una opcion: ");
         string numString = Console.ReadLine() ?? "";
         resultado = int.TryParse(numString, out opcion);
@@ -152,10 +202,58 @@ do
             break;
 
     }
-    Console.WriteLine("\nRESULTADO = " + operacion);
+    string resultadoString = operacion.ToString();
+    Console.WriteLine("\nRESULTADO = " + resultadoString);
 
     Console.Write("\nDesea volver a operar? (1. SI // 2. NO) --> ");
     string respuestaString = Console.ReadLine() ?? "";
     int.TryParse(respuestaString, out volver);
 
 } while (volver == 1);
+
+float resultadoEcuacion = 0;
+Console.WriteLine("Ingrese la ecuacion que desea resolver: ");
+string ecuacion = Console.ReadLine() ?? "";
+char operador = ' ';
+
+if (ecuacion.Contains('+'))
+    operador = '+';
+else if (ecuacion.Contains('-'))
+    operador = '-';
+else if (ecuacion.Contains('*'))
+    operador = '*';
+else if (ecuacion.Contains('/'))
+    operador = '/';
+
+string[] partes = ecuacion.Split(operador);
+
+float numero1 = float.Parse(partes[0]);
+float numero2 = float.Parse(partes[1]);
+
+switch (operador)
+{
+    case '+':
+        resultadoEcuacion = numero1 + numero2;
+        break;
+
+    case '-':
+        resultadoEcuacion = numero1 - numero2;
+        break;
+
+    case '*':
+        resultadoEcuacion = numero1 * numero2;
+        break;
+
+    case '/':
+        if (num2 != 0)
+        {
+            resultadoEcuacion = numero1 / numero2;
+        }
+        else
+        {
+            Console.WriteLine("No se puede realizar la division en 0");
+        }
+        break;
+}
+
+Console.WriteLine($"Resultado = {resultadoEcuacion}");
