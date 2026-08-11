@@ -36,7 +36,7 @@
 //CALCULADORA V1
 int opcion, volver = 1;
 float num1 = 0, num2 = 0;
-bool resultado, EsNumero1, EsNumero2;
+bool resultado, boolNum1, boolNum2;
 
 Console.Write("Ingrese una cadena de texto: ");
 string CadenaTexto = Console.ReadLine() ?? "";
@@ -82,9 +82,9 @@ Console.WriteLine($"La cadena en mayuscula: {textoMayuscula}");
 string textoMinuscula = CadenaTexto2.ToLower();
 Console.WriteLine($"La cadena en mayuscula: {textoMinuscula}\n");
 
-string[] palabras = CadenaTexto.Split('o');
+string[] palabras = CadenaTexto.Split('o'); //elimina la letra 'o' de la cadena
 
-foreach (string palabra in palabras)
+foreach (string palabra in palabras) //recorro con foreach pq es un arr
 {
     Console.WriteLine(palabra);
 }
@@ -112,17 +112,17 @@ do
             //num1
             Console.Write("\nIngrese num1: ");
             string num1String = Console.ReadLine() ?? "";
-            EsNumero1 = float.TryParse(num1String, out num1);
+            boolNum1 = float.TryParse(num1String, out num1);
 
-        } while (!EsNumero1);
+        } while (!boolNum1);
 
         do
         {
             //num2
             Console.Write("Ingrese num2: ");
             string num2String = Console.ReadLine() ?? "";
-            EsNumero2 = float.TryParse(num2String, out num2);
-        } while (!EsNumero2);
+            boolNum2 = float.TryParse(num2String, out num2);
+        } while (!boolNum2);
     }
     else
     {
@@ -130,9 +130,9 @@ do
         {
             Console.Write("\nIngrese un numero: ");
             string num1String = Console.ReadLine() ?? "";
-            EsNumero1 = float.TryParse(num1String, out num1);
+            boolNum1 = float.TryParse(num1String, out num1);
 
-        } while (!EsNumero1);
+        } while (!boolNum1);
     }
 
     switch (opcion)
